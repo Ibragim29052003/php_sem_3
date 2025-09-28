@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    container_name: laravel-app
+    ports:
+      - "8000:8000"   # для php artisan serve
+      - "5173:5173"   # для Vite
+    volumes:
+      - .:/var/www/html
+    working_dir: /var/www/html
+    command: tail -f /dev/null # контейнер будет жить, запускаем процессы вручную
+    networks:
+      - laravel-network
+
+networks:
+  laravel-network:
+    driver: bridge

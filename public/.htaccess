@@ -1,0 +1,23 @@
+<IfModule mod_rewrite.c>
+    <IfModule mod_negotiation.c>
+        # Отключаем автоматический поиск вариантов файлов и индексацию директорий
+        Options -MultiViews -Indexes
+    </IfModule>
+
+    # Включаем модуль перенаправлений
+    RewriteEngine On
+
+    # Передача заголовка Authorization в PHP
+    RewriteCond %{HTTP:Authorization} .
+    RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+
+    # Перенаправление URL с конечным слэшем, если это не папка
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_URI} (.+)/$
+    RewriteRule ^ %1 [L,R=301]
+
+    # Все запросы, которые не являются существующими файлами или папками, перенаправляем на index.php
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^ index.php [L]
+</IfModule>

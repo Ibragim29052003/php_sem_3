@@ -1,0 +1,45 @@
+#!/usr/bin/env php
+<?php
+
+define('LARAVEL_START', microtime(true)); // Отмечаем время старта приложения для профилирования
+
+/*
+|--------------------------------------------------------------------------
+| Register The Auto Loader
+|--------------------------------------------------------------------------
+|
+| Подключаем автозагрузчик Composer для всех классов приложения.
+|
+*/
+require __DIR__.'/vendor/autoload.php';
+
+// Подключаем bootstrap файл приложения
+$app = require_once __DIR__.'/bootstrap/app.php';
+
+/*
+|--------------------------------------------------------------------------
+| Run The Artisan Application
+|--------------------------------------------------------------------------
+|
+| Создаем консольное приложение Laravel (Artisan), обрабатываем команду из CLI
+| и отправляем ответ в терминал.
+|
+*/
+$kernel = $app->make(Illuminate\Contracts\Console\Kernel::class);
+
+$status = $kernel->handle(
+    $input = new Symfony\Component\Console\Input\ArgvInput,  // Команда из CLI
+    new Symfony\Component\Console\Output\ConsoleOutput     // Вывод в терминал
+);
+
+/*
+|--------------------------------------------------------------------------
+| Shutdown The Application
+|--------------------------------------------------------------------------
+|
+| После завершения Artisan запускаем все события завершения и корректно закрываем процесс.
+|
+*/
+$kernel->terminate($input, $status);
+
+exit($status);
