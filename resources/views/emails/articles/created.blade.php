@@ -1,16 +1,8 @@
-@component('mail::message')
-# Новая статья опубликована!
+<h2>Новая статья создана</h2>
 
-**Заголовок:** {{ $title }}
+<p>Статья: <strong>{{ $article->title }}</strong></p>
+<p>Автор: {{ $article->user->name }}</p>
+<p>Дата публикации: {{ $article->published_at }}</p>
 
-**Автор:** {{ $author }}
+<p>Ссылка для просмотра: <a href="{{ $url }}">{{ $url }}</a></p>
 
-{{ $body }}
-
-@component('mail::button', ['url' => route('articles.show', $article)])
-Читать статью
-@endcomponent
-
-Спасибо,<br>
-{{ config('app.name') }}
-@endcomponent

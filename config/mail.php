@@ -115,7 +115,7 @@ return [
     ],
 
 
-    'moderator' => env('MODERATOR_EMAIL', 'moderator@mail.ru'),
+    'moderator' => env('MODERATOR_EMAIL', 'ibragimkuszeterov@gmail.com'),
 
 ];
 

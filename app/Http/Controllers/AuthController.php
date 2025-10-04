@@ -9,12 +9,16 @@ use App\Models\User;
 
 class AuthController extends Controller
 {
+    // -------------------- 9 ЛАБА (WEB-версия) --------------------
+    // Отвечает за формы входа/регистрации через Blade
+    // Сейчас активна, 10-я лаба закомментирована
+
     /**
      * Показ формы регистрации
      */
     public function showRegisterForm()
     {
-        return view('auth.signin');
+        return view('auth.register'); // форма регистрации
     }
 
     /**
@@ -28,7 +32,6 @@ class AuthController extends Controller
             'password' => 'required|min:6|confirmed',
         ]);
 
-        // Создание пользователя с ролью reader по умолчанию
         User::create([
             'name'     => $validated['name'],
             'email'    => $validated['email'],
@@ -44,13 +47,13 @@ class AuthController extends Controller
      */
     public function showLoginForm()
     {
-        return view('auth.login');
+        return view('auth.login'); // форма входа
     }
 
     /**
      * Обработка входа
      */
-    public function authenticate(Request $request)
+    public function login(Request $request)
     {
         $credentials = $request->validate([
             'email'    => 'required|email',
@@ -59,14 +62,6 @@ class AuthController extends Controller
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-
-            // Создаем Sanctum-токен
-            $user  = Auth::user();
-            $token = $user->createToken('auth_token')->plainTextToken;
-
-            // Сохраняем токен в сессии для фронтенда
-            session(['auth_token' => $token]);
-
             return redirect()->intended(route('home'))->with('success', 'Вы успешно вошли!');
         }
 
@@ -80,9 +75,7 @@ class AuthController extends Controller
      */
     public function logout(Request $request)
     {
-        // Удаляем все токены пользователя
-        $request->user()?->tokens()->delete();
-
+        $request->user()?->tokens()->delete(); // удаляем Sanctum-токены
         Auth::logout();
 
         $request->session()->invalidate();
@@ -90,4 +83,16 @@ class AuthController extends Controller
 
         return redirect('/')->with('success', 'Вы вышли из системы.');
     }
+
+    // -------------------- КОНЕЦ 9 ЛАБЫ --------------------
+
+
+    /*
+    // -------------------- 10 ЛАБА (API-версия) --------------------
+    // Закомментирована, чтобы не ломать web-версию
+    public function apiRegister(Request $request) { ... }
+    public function apiLogin(Request $request) { ... }
+    public function apiLogout(Request $request) { ... }
+    // -------------------- КОНЕЦ 10 ЛАБЫ --------------------
+    */
 }

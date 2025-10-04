@@ -35,9 +35,16 @@ class RouteServiceProvider extends ServiceProvider
         // Группировка маршрутов и подключение соответствующих файлов
         $this->routes(function () {
             // API маршруты → префикс /api
-            Route::middleware('api:sanctum')
-                ->prefix('api')
-                ->group(base_path('routes/api.php'));
+            // ДЛЯ 9 ЛАБЫ И МЕНЬШЕ
+            // Route::middleware('api:sanctum')
+            //     ->prefix('api')
+            //     ->group(base_path('routes/api.php'));
+
+            // ДЛЯ 10 ЛАБЫ 
+                Route::middleware('api') // просто api
+                    ->prefix('api')
+                    ->group(base_path('routes/api.php'));
+
 
             // Веб маршруты → без префикса, обычные веб-роуты
             Route::middleware('web')

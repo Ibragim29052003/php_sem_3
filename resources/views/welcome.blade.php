@@ -11,12 +11,10 @@
             @foreach($articles as $article)
             <div class="col-md-4 mb-4">
                 <div class="card h-100">
-                           
-                         <img src="{{ asset('images/' . ($article->preview_image ?? 'placeholder_preview.png')) }}" 
-                            class="card-img-top" 
-                            alt="{{ $article->title }}" 
-                            style="height: 200px; object-fit: cover;">
-
+                    <img src="{{ asset('images/' . ($article->preview_image ?? 'placeholder_preview.png')) }}" 
+                         class="card-img-top" 
+                         alt="{{ $article->title }}" 
+                         style="height: 200px; object-fit: cover;">
 
                     <div class="card-body d-flex flex-column">
                         <h5 class="card-title">{{ $article->title }}</h5>
@@ -27,7 +25,8 @@
                             {{ $article->comments_count ?? 0 }} comments
                         </p>
 
-                        <a href="{{ route('articles.show', $article->id) }}" class="btn btn-primary mt-auto btn-sm">
+                        {{-- REST API ссылка на статью --}}
+                        <a href="{{ url('/api/articles/' . $article->id) }}" class="btn btn-primary mt-auto btn-sm">
                             Read more →
                         </a>
                     </div>

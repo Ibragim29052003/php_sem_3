@@ -19,15 +19,15 @@ class ArticleCreatedMail extends Mailable
     }
 
     public function build()
-    {
-        return $this->subject('Новая статья: ' . $this->article->title)
-                    ->markdown('emails.articles.created')
-                    ->with([
-                        'title'   => $this->article->title,
-                        'body'    => $this->article->body,
-                        'author'  => $this->article->user->name,
-                        'article' => $this->article, 
-                    ]);
-    }
-    
+{
+    // Ссылка на просмотр статьи через API
+    $articleUrl = url('/api/articles/' . $this->article->id);
+
+    return $this->subject('Создана новая статья')
+                ->view('emails.articles.created')
+                ->with([
+                    'article' => $this->article,
+                    'url' => $articleUrl,
+                ]);
+}
 }

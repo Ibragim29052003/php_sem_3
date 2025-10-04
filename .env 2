@@ -1,0 +1,60 @@
+APP_NAME=Laravel
+APP_ENV=local
+APP_KEY=base64:eo/yHD1PADfYdxvnrzABnYm0jTzCYOpofKeh25smNK8=
+APP_DEBUG=true
+APP_URL=http://0.0.0.0:8000
+
+LOG_CHANNEL=stack
+LOG_DEPRECATIONS_CHANNEL=null
+LOG_LEVEL=debug
+
+# --- Database ---
+DB_CONNECTION=sqlite
+DB_DATABASE=/var/www/html/database/database.sqlite
+DB_FOREIGN_KEYS=true
+
+# --- Broadcasting ---
+BROADCAST_DRIVER=pusher
+PUSHER_APP_ID=2047667
+PUSHER_APP_KEY=47564f58a5686484bc04
+PUSHER_APP_SECRET=67dfda3c69b5bc6da940
+PUSHER_APP_CLUSTER=eu
+# PUSHER_HOST=
+# PUSHER_PORT=
+PUSHER_SCHEME=https
+
+# --- Cache / Queue / Session ---
+CACHE_DRIVER=file
+FILESYSTEM_DISK=local
+QUEUE_CONNECTION=database
+SESSION_DRIVER=file
+SESSION_LIFETIME=120
+
+# --- Redis ---
+REDIS_HOST=127.0.0.1
+REDIS_PASSWORD=null
+REDIS_PORT=6379
+
+# --- Mail ---
+MAIL_MAILER=smtp
+MAIL_HOST=smtp.gmail.com
+MAIL_PORT=465
+MAIL_USERNAME=ibragimkuszeterov@gmail.com
+MAIL_PASSWORD=qdvqkrnrsndnyqyn
+MAIL_ENCRYPTION=ssl
+MAIL_FROM_ADDRESS=ibragimkuszeterov@gmail.com
+MAIL_FROM_NAME="${APP_NAME}"
+MODERATOR_EMAIL=ibragimkuszeterov@gmail.com
+
+# --- AWS (not used now) ---
+AWS_ACCESS_KEY_ID=
+AWS_SECRET_ACCESS_KEY=
+AWS_DEFAULT_REGION=us-east-1
+AWS_BUCKET=
+AWS_USE_PATH_STYLE_ENDPOINT=false
+
+# --- Vite frontend ---
+VITE_APP_NAME="${APP_NAME}"
+VITE_PUSHER_APP_KEY=47564f58a5686484bc04
+VITE_PUSHER_APP_CLUSTER=eu
+VITE_PUSHER_SCHEME="https"
